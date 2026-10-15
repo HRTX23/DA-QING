@@ -10,7 +10,7 @@ export const PEOPLE=[
 {name:'หลิงฮวา',role:'พระปิตุจฉา',detail:'อายุ 21 ปี พระราชธิดาของเฉิงอู่ ปฏิบัติหน้าที่ดูแลพื้นที่ในจักรวรรดิ'},
 {name:'หลิงอวี้',role:'พระปิตุจฉา',detail:'อายุ 21 ปี พระราชธิดาของเฉิงอู่ ปฏิบัติหน้าที่ดูแลพื้นที่ในจักรวรรดิ'},
 {name:'ซุนเต๋อไห่',role:'หัวหน้าขันที',detail:'อายุ 59 ปี รับใช้ราชสำนักในช่วงเปลี่ยนรัชกาล'}];
-export const PLACES=[{id:'east',name:'ตำหนักบูรพา',available:true},{id:'qianqing',name:'ตำหนักเฉียนชิง',available:false},{id:'kunning',name:'ตำหนักคุนหนิง',available:false},{id:'taihe',name:'ท้องพระโรงไท่เหอ',available:false},{id:'garden',name:'สวนหลวง',available:true},{id:'corridor',name:'ทางเดินภายใน',available:true},{id:'gate',name:'ประตูวัง',available:false},{id:'office',name:'กรมพิธีการ',available:false},{id:'other',name:'ตำหนักอื่น',available:false}];
+export const PLACES=[{id:'east',name:'ห้องบรรทมตำหนักบูรพา',available:true},{id:'reception',name:'ห้องรับรองตำหนักบูรพา',available:true},{id:'courtyard',name:'ลานหน้าตำหนัก',available:true},{id:'qianqing',name:'ตำหนักเฉียนชิง',available:false},{id:'kunning',name:'ตำหนักคุนหนิง',available:false},{id:'taihe',name:'ท้องพระโรงไท่เหอ',available:false},{id:'garden',name:'สวนหลวง',available:true},{id:'corridor',name:'ทางเดินภายใน',available:true},{id:'gate',name:'ประตูวัง',available:false},{id:'office',name:'กรมพิธีการ',available:false},{id:'other',name:'ตำหนักอื่น',available:false}];
 export const BEATS=[
 {id:'edict',at:340,title:'พระราชโองการสละราชสมบัติ',detail:'เฉิงอู่ลงพระนามในพระราชโองการ ณ ตำหนักเฉียนชิง'},
 {id:'family',at:385,title:'เช้าที่ตำหนักบูรพา',detail:'หลิงอันพบเย่วหลานและหงจิ้นก่อนพิธี'},

@@ -1,0 +1,18 @@
+export const SCENES=[
+ {id:'east',file:'east-palace',name:'ห้องบรรทมตำหนักบูรพา',kind:'ตำหนักส่วนพระองค์',desc:'แสงอ่อนลอดผ่านหน้าต่างฉลุ ม่านสีหยกไหวเบา ๆ ข้างเตียงและของเล่นไม้ของหงจิ้น'},
+ {id:'reception',file:'east-reception',name:'ห้องรับรองตำหนักบูรพา',kind:'ตำหนักส่วนพระองค์',desc:'โต๊ะน้ำชาและเก้าอี้ไม้แกะสลักจัดไว้อย่างเรียบร้อย เป็นที่พบปะของครอบครัวในตำหนัก'},
+ {id:'courtyard',file:'east-courtyard',name:'ลานหน้าตำหนัก',kind:'พื้นที่กลางแจ้ง',desc:'ลานหินทอดไปถึงบันไดตำหนัก ใต้ชายคาสีทองมีร่มเงาจากต้นไม้และเสาแดง'},
+ {id:'corridor',file:'palace-corridor',name:'ทางเดินระเบียงวัง',kind:'ทางเชื่อมตำหนัก',desc:'เสาแดงเรียงต่อกันไปตามระเบียง ทางเดินเปิดมองเห็นสวนและหลังคาตำหนักข้างเคียง'},
+ {id:'garden',file:'imperial-garden',name:'สวนหลวง',kind:'พื้นที่กลางแจ้ง',desc:'ทางหินคดผ่านสระน้ำ โขดหินและพุ่มไม้ ศาลาเล็กตั้งสงบอยู่ใต้เงาสน'},
+ {id:'qianqing',file:'qianqing-palace',name:'ตำหนักเฉียนชิง',kind:'เขตพระราชกิจ',desc:'โต๊ะทรงอักษรตั้งอยู่เบื้องหน้าพระราชอาสน์ รายล้อมด้วยเสาแดงและฉากแกะสลักทอง'},
+ {id:'kunning',file:'kunning-palace',name:'ตำหนักคุนหนิง',kind:'เขตฝ่ายใน',desc:'ฉากลายหงส์และม่านไหมล้อมห้องรับรอง เครื่องเรือนสีเข้มตัดกับเบาะแดงและแจกันกล้วยไม้'},
+ {id:'taihe',file:'taihe-hall',name:'ท้องพระโรงไท่เหอ',kind:'เขตพระราชพิธี',desc:'เสามังกรสูงล้อมท้องพระโรง พระราชบัลลังก์ทองตั้งบนฐานยกระดับเหนือพื้นหินกว้าง'}
+];
+export const sceneFor=id=>SCENES.find(s=>s.id===id)||SCENES[0];
+
+export function palaceGallery(places,location,esc){return `<div class="palace-intro"><div><span class="royal-kicker">THE FORBIDDEN CITY</span><h2>แปดมุมแห่งพระราชวัง</h2><p>เลือกชมฉาก หรือให้ผู้ดูแลพาเดินทางไปยังพื้นที่ที่เปิดอยู่</p></div><span class="royal-count">8 ฉาก</span></div><div class="palace-grid">${SCENES.map((s,i)=>{
+ const place=places.find(p=>p.id===s.id),current=s.id===location;
+ return `<article class="palace-card ${current?'is-current':''}"><button class="palace-image" data-scene-preview="${s.id}" aria-label="ชมฉาก ${esc(s.name)}"><img src="./assets/${s.file}.png" alt="ภาพวาด ${esc(s.name)}" loading="lazy"><span class="palace-number">${String(i+1).padStart(2,'0')}</span><span class="palace-expand">ชมภาพเต็ม ↗</span></button><div class="palace-caption"><div class="tag">${esc(s.kind)}${current?' · อยู่ที่นี่':''}</div><h3>${esc(s.name)}</h3><p>${esc(s.desc)}</p><div class="palace-actions"><button data-scene-preview="${s.id}">ชมฉาก</button>${place?.available?`<button class="palace-travel" data-goto="${s.id}" ${current?'disabled':''}>${current?'สถานที่ปัจจุบัน':'ให้ผู้ดูแลพาไป · 12 นาที'}</button>`:'<span class="palace-restricted">เข้าชมภาพได้ · การเดินทางรอเหตุการณ์ในเรื่อง</span>'}</div></div></article>`;
+ }).join('')}</div><p class="hint">ภาพประกอบโลกประวัติศาสตร์ทางเลือก · แผนผังสำหรับเล่นเกม ไม่ใช่ผังสถาปัตยกรรมตามมาตราส่วน</p><dialog id="scene-preview" class="scene-preview" aria-label="ชมฉากพระราชวัง"><button class="scene-preview-close" aria-label="ปิดภาพฉาก">ปิด ×</button><div id="scene-preview-content"></div></dialog>`;}
+
+export function bindSceneGallery(esc){const modal=document.getElementById('scene-preview');if(!modal)return;document.querySelectorAll('[data-scene-preview]').forEach(button=>button.addEventListener('click',()=>{const s=sceneFor(button.dataset.scenePreview);document.getElementById('scene-preview-content').innerHTML=`<img src="./assets/${s.file}.png" alt="ภาพเต็ม ${esc(s.name)}"><div class="scene-preview-caption"><span class="tag">${esc(s.kind)}</span><h2>${esc(s.name)}</h2><p>${esc(s.desc)}</p></div>`;modal.showModal()}));modal.querySelector('.scene-preview-close').addEventListener('click',()=>modal.close());modal.addEventListener('click',e=>{if(e.target===modal)modal.close()});}
